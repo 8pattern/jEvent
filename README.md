@@ -5,7 +5,6 @@ npm install -D @8pattern/jevent
 ```
 
 
-
 ## Usage
 
 1. import the module
@@ -49,7 +48,8 @@ jEvent(target).clear('eventName')
 if *no object*  binding, jEvent will binding a **global object** by default. In other words, the following statements also work.
 
 ```javascript
-const handle = jEvent().on('eventName', () => {})
+const handle = () => {}
+jEvent().on('eventName', handle)
 jEvent().emit('eventName')
 jEvent().off('eventName', handle)
 jEvent().clear('eventName')
@@ -58,7 +58,8 @@ jEvent().clear('eventName')
 or 
 
 ```javascript
-const handle = jEvent.on('eventName', () => {})
+const handle = () => {}
+jEvent.on('eventName', handle)
 jEvent.emit('eventName')
 jEvent.off('eventName', handle)
 jEvent.clear('eventName')

@@ -1,27 +1,27 @@
-const Store: WeakMap<object, JEvent> = new WeakMap()
-
 export interface Events {
   [key: string]: Array<Function>
 }
 
-class JEvent {
+export default class JEvent {
   public readonly Events: Events = {}
-  public readonly on: Function = this._subscribe
-  public readonly emit: Function = this._publish
-  public readonly off: Function = this._remove
-  public readonly clear: Function = this._clear
+  public readonly on = this._subscribe
+  public readonly emit = this._publish
+  public readonly off = this._remove
+  public readonly clear = this._clear
 
-  constructor(target: object = Store) {
+  static Store: WeakMap<object, JEvent> = new WeakMap()
+
+  constructor(target: object = JEvent.Store) {
     if (target instanceof JEvent) {
       return target
     }
-    if (Store.has(target)) {
-      return Store.get(target) as JEvent
+    if (JEvent.Store.has(target)) {
+      return JEvent.Store.get(target) as JEvent
     }
-    Store.set(target, this)
+    JEvent.Store.set(target, this)
   }
 
-  private _subscribe(event: string | string[], handle: Function): Function {
+  private _subscribe(event: string | string[], handle: Function): void {
     ((typeof event === 'string') ? [event] : event)
       .forEach((evt) => {
         if (!this.Events[evt]) {
@@ -31,7 +31,6 @@ class JEvent {
           this.Events[evt].push(handle)
         }
       })
-    return handle
   }
 
   private _publish(event: string | string[], ...args: any[]): void {
@@ -65,15 +64,3 @@ class JEvent {
     return Reflect.deleteProperty(this.Events, event)
   }
 }
-
-export default function jEvent(target: object = Store) {
-  return new JEvent(target)
-}
-
-(function() {
-  const defaultInstance = new JEvent()
-  for (let prop in defaultInstance) {
-    jEvent[prop] = defaultInstance[prop]
-  }
-  jEvent['Store'] = Store
-})()

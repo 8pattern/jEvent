@@ -1,3 +1,1 @@
-import jEvent from "./jEvent"
-
-export default jEvent
+export { default } from "./jEventFun"

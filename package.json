@@ -1,6 +1,6 @@
 {
   "name": "@8pattern/jevent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a zero-dependent library accomplishing the subscribe/publish partten for JavaScript & TypeScript",
   "scripts": {
     "dev": "webpack --mode=development",
@@ -28,7 +28,7 @@
     "webpack-cli": "^3.3.9"
   },
   "main": "./dist/jEvent.js",
-  "types": "./types/jEvent.d.ts",
+  "types": "./src",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/8th-pattern/jEvent.git"
