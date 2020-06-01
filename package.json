@@ -1,7 +1,7 @@
 {
   "name": "@8pattern/jevent",
   "version": "1.0.0",
-  "description": "a non-dependent library to achieve subscribe/publish partten for JS",
+  "description": "a zero-dependent library accomplishing the subscribe/publish partten for JavaScript & TypeScript",
   "scripts": {
     "dev": "webpack --mode=development",
     "build": "webpack --mode=production",
