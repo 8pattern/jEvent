@@ -1,6 +1,6 @@
 {
   "name": "@8pattern/jevent",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "a zero-dependent library accomplishing the subscribe/publish partten for JavaScript & TypeScript",
   "scripts": {
     "dev": "rollup -c -w --environment NODE_ENV:development",
