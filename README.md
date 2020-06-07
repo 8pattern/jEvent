@@ -1,32 +1,24 @@
 ## Installation
 
 ```node
-npm install -D @8pattern/jevent
+npm install @8pattern/jevent
 ```
 
 
 ## Usage
 
-1. import the module
+There are three methods to use jEvent:
+
+### Bind a object 
+> Suitable when you want to isolate events of different targets
 
 ```javascript
 import jEvent from '@8pattern/jevent'
-```
 
-​		or
-
-```javascript
-const jEvent = require('@8pattern/jevent')
-```
-
-2. bind a certain object
-
-```javascript
 const tareget = document.body
 const handle = () => {}
 
 // suscribe
-// the return value equals handle
 jEvent(target).on('eventName', handle)
 jEvent(target).on(['event1', 'event2'], handle)
 
@@ -43,11 +35,24 @@ jEvent(target).off('eventName', handle)
 jEvent(target).clear('eventName')
 ```
 
-  
-
-if *no object*  binding, jEvent will binding a **global object** by default. In other words, the following statements also work.
+### As a variable
+> If you want a global event channel, try it
 
 ```javascript
+import jEvent from '@8pattern/jevent'
+
+const handle = () => {}
+jEvent.on('eventName', handle)
+jEvent.emit('eventName')
+jEvent.off('eventName', handle)
+jEvent.clear('eventName')
+```
+
+In fact, if *no object*  binding, jEvent will binding a default **global object**. In other words, the usage is the sugar of the following statements.
+
+```javascript
+import jEvent from '@8pattern/jevent'
+
 const handle = () => {}
 jEvent().on('eventName', handle)
 jEvent().emit('eventName')
@@ -55,12 +60,35 @@ jEvent().off('eventName', handle)
 jEvent().clear('eventName')
 ```
 
-or 
+### As a class
+
+> Be aware that the imported module is a named one
 
 ```javascript
+import { JEvent } from '@8pattern/jevent'
+
+const jEvent = new JEvent()
+
 const handle = () => {}
 jEvent.on('eventName', handle)
 jEvent.emit('eventName')
 jEvent.off('eventName', handle)
 jEvent.clear('eventName')
+```
+
+> The method is **effective** if you want achieve a event bus on a class
+```javascript
+import { JEvent } from '@8pattern/jevent'
+
+class MyClass extends JEvent {
+    // some codes
+}
+
+const myInstance = new MyClass()
+
+const handle = () => {}
+myInstance.on('eventName', handle)
+myInstance.emit('eventName')
+myInstance.off('eventName', handle)
+myInstance.clear('eventName')
 ```

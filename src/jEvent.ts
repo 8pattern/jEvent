@@ -3,7 +3,7 @@ export interface Events {
 }
 
 export default class JEvent {
-  public readonly Events: Events = {}
+  private readonly Events: Events = {}
   public readonly on = this._subscribe
   public readonly emit = this._publish
   public readonly off = this._remove
